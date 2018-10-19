@@ -16,28 +16,31 @@ const styles = {
   }
 };
 
-export default function index({ exercises }) {
+export default function index({ exercises, category }) {
   return (
     <Grid container>
       <Grid item sm>
         <Paper style={styles.Paper}>
-          {exercises.map(([group, exercises]) => (
-            <Fragment>
-              <Typography
-                varient="headline"
-                style={{ textTransform: "capitalize" }}
-              >
-                {group}
-              </Typography>
-              <List component="ul">
-                {exercises.map(({ title }) => (
-                  <ListItem button>
-                    <ListItemText primary={title} />
-                  </ListItem>
-                ))}
-              </List>
-            </Fragment>
-          ))}
+          {exercises.map(
+            ([group, exercises]) =>
+              !category || category === group ? (
+                <Fragment>
+                  <Typography
+                    varient="headline"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    {group}
+                  </Typography>
+                  <List component="ul">
+                    {exercises.map(({ title }) => (
+                      <ListItem button>
+                        <ListItemText primary={title} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Fragment>
+              ) : null
+          )}
         </Paper>
       </Grid>
       <Grid item sm>

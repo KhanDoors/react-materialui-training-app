@@ -1,4 +1,4 @@
-export const muscles = ["shoulders", "chest", "arms", "Back", "legs"];
+export const muscles = ["shoulders", "chest", "arms", "back", "legs"];
 
 export const exercises = [
   {

@@ -5,7 +5,13 @@ import Typography from "@material-ui/core/Typography";
 
 function Header() {
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      style={{
+        backgroundColor: "#2f2f2f",
+        padding: "5px"
+      }}
+    >
       <Toolbar>
         <Typography variant="headline" color="inherit">
           Exercise Database
