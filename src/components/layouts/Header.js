@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CreateDialog from "../Exercises/Dialogs/Create";
 
-function Header({ muscles }) {
+function Header({ muscles, onExerciseCreate }) {
   return (
     <AppBar
       position="static"
@@ -17,7 +17,7 @@ function Header({ muscles }) {
         <Typography variant="headline" color="inherit" style={{ flex: 1 }}>
           Exercise Database
         </Typography>
-        <CreateDialog muscles={muscles} />
+        <CreateDialog muscles={muscles} onCreate={onExerciseCreate} />
       </Toolbar>
     </AppBar>
   );

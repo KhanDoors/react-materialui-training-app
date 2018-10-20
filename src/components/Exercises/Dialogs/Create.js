@@ -7,11 +7,17 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  FormControl: {
+    width: 500
+  }
+});
 
 class Create extends Component {
   state = {
@@ -32,8 +38,26 @@ class Create extends Component {
   handleChange = name => ({ target: { value } }) => {
     this.setState({
       exercise: {
-        ...this.setState.exercise,
+        ...this.state.exercise,
         [name]: value
+      }
+    });
+  };
+
+  handleSubmit = () => {
+    const { exercise } = this.state;
+
+    this.props.onCreate({
+      ...exercise,
+      id: exercise.title.toLowerCase().replace(/ /g, "-")
+    });
+
+    this.setState({
+      open: false,
+      exercise: {
+        title: "",
+        description: "",
+        muscles: ""
       }
     });
   };
@@ -43,11 +67,11 @@ class Create extends Component {
         open,
         exercise: { title, description, muscles }
       } = this.state,
-      { muscles: categories } = this.props;
+      { classes, muscles: categories } = this.props;
 
     return (
       <Fragment>
-        <Button variant="fab" onClick={this.handleToggle} mini>
+        <Button variant="fab" color="primary" onClick={this.handleToggle} mini>
           <AddIcon />
         </Button>
         <Dialog open={open} onClose={this.handleToggle}>
@@ -58,15 +82,18 @@ class Create extends Component {
               <TextField
                 label="Title"
                 value={title}
-                onChange={this.handleChange("muscles")}
+                onChange={this.handleChange("title")}
                 margin="normal"
+                className={classes.FormControl}
               />
               <br />
-              <FormControl>
+              <FormControl className={classes.FormControl}>
                 <InputLabel htmlFor="muscles">Muscles</InputLabel>
-                <Select value={muscles} onChange={this.handleChange}>
+                <Select value={muscles} onChange={this.handleChange("muscles")}>
                   {categories.map(category => (
-                    <MenuItem value={category}>{category}</MenuItem>
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -74,15 +101,20 @@ class Create extends Component {
               <TextField
                 multiline
                 rows="4"
-                label="description"
+                label="Description"
                 value={description}
                 onChange={this.handleChange("description")}
                 margin="normal"
+                className={classes.FormControl}
               />
             </form>
           </DialogContent>
           <DialogActions>
-            <Button color="primary" varient="raised">
+            <Button
+              color="primary"
+              varient="raised"
+              onClick={this.handleSubmit}
+            >
               Create
             </Button>
           </DialogActions>
@@ -91,5 +123,4 @@ class Create extends Component {
     );
   }
 }
-
-export default Create;
+export default withStyles(styles)(Create);
