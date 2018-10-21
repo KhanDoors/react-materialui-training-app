@@ -14,8 +14,7 @@ import Form from "./Form";
 const styles = {
   Paper: {
     padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 5,
     height: 500,
     overflowY: "auto"
   }
@@ -40,7 +39,7 @@ export default function index({
 }) {
   return (
     <Grid container>
-      <Grid item sm>
+      <Grid item xs={12} sm={6}>
         <Paper style={styles.Paper}>
           {exercises.map(
             ([group, exercises]) =>
@@ -72,17 +71,20 @@ export default function index({
           )}
         </Paper>
       </Grid>
-      <Grid item sm>
+      <Grid item xs={12} sm={6}>
         <Paper style={styles.Paper}>
+          <Typography variant="display1" gutterBottom>
+            {title}
+          </Typography>
           {editMode ? (
-            <Form exercise={exercise} muscles={muscles} onSubmit={onEdit} />
+            <Form
+              key={id}
+              exercise={exercise}
+              muscles={muscles}
+              onSubmit={onEdit}
+            />
           ) : (
-            <Fragment>
-              <Typography variant="display1">{title}</Typography>
-              <Typography variant="subheading" style={{ marginTop: 20 }}>
-                {description}
-              </Typography>
-            </Fragment>
+            <Typography variant="subheading">{description}</Typography>
           )}
         </Paper>
       </Grid>

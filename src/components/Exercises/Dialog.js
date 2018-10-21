@@ -32,11 +32,11 @@ class Create extends Component {
 
     return (
       <Fragment>
-        <Button variant="fab" onClick={this.handleToggle} mini>
+        <Button color="primary" variant="fab" onClick={this.handleToggle} mini>
           <Add />
         </Button>
 
-        <Dialog open={open} onClose={this.handleToggle}>
+        <Dialog open={open} onClose={this.handleToggle} fullWidth maxWidth="xs">
           <DialogTitle>Create a New Exercise</DialogTitle>
           <DialogContent>
             <DialogContentText>

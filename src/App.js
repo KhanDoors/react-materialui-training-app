@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Header, Footer } from "./components/layouts/index";
 import Exercises from "./components/Exercises/index";
 import { muscles, exercises } from "./store.js";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import "./App.css";
 
@@ -75,6 +76,7 @@ class App extends Component {
 
     return (
       <Fragment>
+        <CssBaseline />
         <Header
           muscles={muscles}
           onExerciseCreate={this.handleExerciseCreate}
