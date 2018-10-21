@@ -28,6 +28,12 @@ class Form extends Component {
         };
   }
 
+  componentWillReceiveProps({ exercise }) {
+    this.setState({
+      ...exercise
+    });
+  }
+
   handleChange = name => ({ target: { value } }) =>
     this.setState({
       [name]: value

@@ -40,7 +40,8 @@ class App extends Component {
 
   handleExerciseSelect = id =>
     this.setState(({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: false
     }));
 
   handleExerciseCreate = exercise =>
