@@ -18,7 +18,6 @@ function Footer({ muscles, category, onSelect }) {
         onChange={onIndexSelect}
         indicatorColor="primary"
         textColor="primary"
-        centered
       >
         <Tab label="All" />
         {muscles.map(group => (

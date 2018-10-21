@@ -20,6 +20,12 @@ class Create extends Component {
     });
   };
 
+  handleFormSubmit = exercise => {
+    this.handleToggle();
+
+    this.props.onCreate(exercise);
+  };
+
   render() {
     const { open } = this.state,
       { muscles } = this.props;

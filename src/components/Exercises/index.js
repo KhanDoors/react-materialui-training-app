@@ -22,6 +22,7 @@ const styles = {
 };
 
 export default function index({
+  classes,
   muscles,
   exercises,
   category,

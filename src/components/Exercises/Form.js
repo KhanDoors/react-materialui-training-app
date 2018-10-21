@@ -14,9 +14,9 @@ const styles = theme => ({
 });
 
 class Form extends Component {
-  state = this.getInitialState();
+  state = this.getInitState();
 
-  getInitialState() {
+  getInitState() {
     const { exercise } = this.props;
 
     return exercise
@@ -34,64 +34,67 @@ class Form extends Component {
     });
 
   handleSubmit = () => {
-    const { exercise } = this.state;
+    // TODO: validate
 
     this.props.onSubmit({
-      ...exercise,
-      id: exercise.title.toLowerCase().replace(/ /g, "-")
+      id: this.state.title.toLocaleLowerCase().replace(/ /g, "-"),
+      ...this.state
+    });
+  };
+
+  handleChange = name => ({ target: { value } }) =>
+    this.setState({
+      [name]: value
     });
 
-    this.setState({
-      open: false,
-      exercise: {
-        title: "",
-        description: "",
-        muscles: ""
-      }
+  handleSubmit = () => {
+    this.props.onSubmit({
+      id: this.state.title.toLowerCase().replace(/ /g, "-"),
+      ...this.state
     });
+
+    this.setState(this.getInitState());
   };
 
   render() {
     const { title, description, muscles } = this.state,
-      { classes, muscles: categories } = this.props;
+      { classes, exercise, muscles: categories } = this.props;
 
     return (
-      <div>
-        <form>
-          <TextField
-            label="Title"
-            value={title}
-            onChange={this.handleChange("title")}
-            margin="normal"
-            className={classes.FormControl}
-          />
-          <br />
-          <FormControl className={classes.FormControl}>
-            <InputLabel htmlFor="muscles">Muscles</InputLabel>
-            <Select value={muscles} onChange={this.handleChange("muscles")}>
-              {categories.map(category => (
-                <MenuItem key={category} value={category}>
-                  {category}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <br />
-          <TextField
-            multiline
-            rows="4"
-            label="Description"
-            value={description}
-            onChange={this.handleChange("description")}
-            margin="normal"
-            className={classes.FormControl}
-          />
-          <br />
-          <Button color="primary" varient="raised" onClick={this.handleSubmit}>
-            Create
-          </Button>
-        </form>
-      </div>
+      <form>
+        <TextField
+          label="Title"
+          value={title}
+          onChange={this.handleChange("title")}
+          margin="normal"
+          className={classes.FormControl}
+        />
+        <br />
+        <FormControl className={classes.FormControl}>
+          <InputLabel htmlFor="muscles">Muscles</InputLabel>
+          <Select value={muscles} onChange={this.handleChange("muscles")}>
+            {categories.map(category => (
+              <MenuItem key={category} value={category}>
+                {category}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <br />
+        <TextField
+          multiline
+          rows="4"
+          label="Description"
+          value={description}
+          onChange={this.handleChange("description")}
+          margin="normal"
+          className={classes.FormControl}
+        />
+        <br />
+        <Button color="primary" variant="contained" onClick={this.handleSubmit}>
+          {exercise ? "Edit" : "Create"}
+        </Button>
+      </form>
     );
   }
 }
