@@ -14,7 +14,7 @@ function Header({ muscles, onExerciseCreate }) {
       }}
     >
       <Toolbar>
-        <Typography variant="headline" color="primary" style={{ flex: 1 }}>
+        <Typography variant="headline" color="secondary" style={{ flex: 1 }}>
           Exercise Database
         </Typography>
         <CreateDialog muscles={muscles} onCreate={onExerciseCreate} />

@@ -32,7 +32,12 @@ class Create extends Component {
 
     return (
       <Fragment>
-        <Button color="primary" variant="fab" onClick={this.handleToggle} mini>
+        <Button
+          color="secondary"
+          variant="fab"
+          onClick={this.handleToggle}
+          mini
+        >
           <Add />
         </Button>
 

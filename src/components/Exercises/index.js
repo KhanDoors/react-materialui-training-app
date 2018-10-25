@@ -21,7 +21,6 @@ const styles = {
 };
 
 export default function index({
-  classes,
   muscles,
   exercises,
   category,
@@ -47,6 +46,7 @@ export default function index({
                 <Fragment key={group}>
                   <Typography
                     varient="headline"
+                    color="secondary"
                     style={{ textTransform: "capitalize" }}
                   >
                     {group}
@@ -56,10 +56,16 @@ export default function index({
                       <ListItem key={id} button onClick={() => onSelect(id)}>
                         <ListItemText primary={title} />
                         <ListItemSecondaryAction>
-                          <IconButton onClick={() => onSelectEdit(id)}>
+                          <IconButton
+                            color="primary"
+                            onClick={() => onSelectEdit(id)}
+                          >
                             <EditIcon />
                           </IconButton>
-                          <IconButton onClick={() => onDelete(id)}>
+                          <IconButton
+                            color="primary"
+                            onClick={() => onDelete(id)}
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </ListItemSecondaryAction>
@@ -73,7 +79,7 @@ export default function index({
       </Grid>
       <Grid item xs={12} sm={6}>
         <Paper style={styles.Paper}>
-          <Typography variant="display1" gutterBottom>
+          <Typography variant="display1" gutterBottom color="secondary">
             {title}
           </Typography>
           {editMode ? (
